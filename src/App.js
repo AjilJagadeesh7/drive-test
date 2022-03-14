@@ -50,7 +50,7 @@ function App() {
 
   const listFiles = (searchTerm = null) => {
     gapi.client.drive.files
-      .list({ fields: 'nextPageToken, files(id, name, parents, mimeType, modifiedTime,thumbnailLink,iconLink,hasThumbnail,webContentLink)',q:"'root' in parents" })
+      .list({ fields: 'nextPageToken, files(id, name, parents, mimeType, modifiedTime,thumbnailLink,iconLink,hasThumbnail,webContentLink,webViewLink)',q:"'root' in parents" })
       .then(function (response) {
         const res = JSON.parse(response.body);
         setDocuments(res?.files);
@@ -93,7 +93,7 @@ function App() {
             gap:'10px',
             cursor:'pointer'
           }}
-            onClick={()=>i.webContentLink?window.open(i.webContentLink):''}
+            onClick={()=>i.webViewLink?window.open(i.webViewLink):''}
           >
             <img src={i.iconLink} width={20} height={25}/>
             {i.name}

@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { Login } from "./components/Login";
 import useDrivePicker from "react-google-drive-picker";
 
-const CLIENT_ID = '541384357321-8g5qqjuomn4f7rt0fiebfuf1qg3448e6.apps.googleusercontent.com'
-const API_KEY = 'AIzaSyCEJnp1N11Ks7z2T1qHl7hqAE3KM8EuLl4'
 const SCOPES = 'https://www.googleapis.com/auth/drive' 
 const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
 function App() {
@@ -16,8 +14,8 @@ function App() {
   useEffect(() => {
     const start = () => {
       gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
+        apiKey: process.env.REACT_APP_API_KEY,
+        clientId: process.env.REACT_APP_CLIENT_ID,
         scope: SCOPES,
         discoveryDocs:DISCOVERY_DOCS
       })
@@ -37,8 +35,8 @@ function App() {
   }
   const handleOpenPicker = () => {
     openPicker({
-      clientId: CLIENT_ID,
-      developerKey: API_KEY,
+      clientId: process.env.REACT_APP_CLIENT_ID,
+      developerKey: process.env.REACT_APP_API_KEY,
       viewId: 'DOCS',
       token:gapi.auth.getToken().access_token,
       showUploadView: true,

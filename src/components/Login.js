@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { GoogleLogin,GoogleLogout } from 'react-google-login'
 
-const clientId = '541384357321-8g5qqjuomn4f7rt0fiebfuf1qg3448e6.apps.googleusercontent.com'
-export const Login = ({isLoggedIn,setIsLoggedIn}) => {
+const clientId = process.env.REACT_APP_CLIENT_ID
+export const Login = ({isLoggedIn,setIsLoggedIn,setDocuments,listFiles}) => {
     
     const onSuccess = (response) => {
         setIsLoggedIn(true)
+        listFiles()
         console.log('Login Successful', response.profileObj)
     }
     const onFailure = (response) => {
@@ -13,15 +14,16 @@ export const Login = ({isLoggedIn,setIsLoggedIn}) => {
     }
     
     return (
-        <div>
+        <div className={!isLoggedIn?'flex justify-center items-center h-screen':'flex justify-end'}>
             {
                 isLoggedIn ? 
                 <GoogleLogout
                     clientId={clientId}
                     buttonText="Logout"
                     onLogoutSuccess={() => {
-                        console.log('Logout Successful')
-                        setIsLoggedIn(false)}
+                        setIsLoggedIn(false)
+                        setDocuments([])
+                    }
                     }
                 />
                 :<GoogleLogin 

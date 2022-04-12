@@ -64,15 +64,14 @@ function App() {
 
   return (
     <div className="App">
-     <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+     <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setDocuments={setDocuments} listFiles={listFiles}/>
      {
        isLoggedIn?
-       <>
+       <div className="">
      <button onClick={() => createFile('New File') }>Create File</button>
      <button onClick={handleOpenPicker}>Open Picker</button>
-     <button onClick={listFiles}>Get Files</button>
     
-       </>:''
+       </div>:''
      }
      {
         isFetchingGoogleDriveFiles? <>fetching</>:
